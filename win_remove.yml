@@ -1,0 +1,16 @@
+---
+- name: Desligamento de usuário
+  hosts: winserver
+  gather_facts: no
+  tasks:
+  
+  - name: Removendo usuário no Active Directory
+    win_domain_user:
+      name: Felipe Garcia
+      #upn: fgarcia@limasa.org.br
+      state: absent
+
+  - name: Removendo diretório pessoal na rede
+    win_file:
+      path: C:\Temp\fgarcia
+      state: absent  

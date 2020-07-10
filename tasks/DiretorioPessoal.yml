@@ -1,0 +1,4 @@
+- name: Criando diretório pessoal na rede
+  win_file:
+    path: C:\Temp\{{ login }}
+    state: directory

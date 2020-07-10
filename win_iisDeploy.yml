@@ -1,0 +1,57 @@
+---
+- name: Deploy de um site IIS
+  hosts: winansible
+  gather_facts: no
+  tasks:
+  
+#  - name: Install IIS Web-Server with sub features and management tools
+#    win_feature:
+#      name: Web-Server
+#      state: present
+#      include_sub_features: no
+#      include_management_tools: yes
+#    register: win_feature
+#
+#  - name: Reboot if installing Web-Server feature requires it
+#    win_reboot:
+#    when: win_feature.reboot_required
+
+#  - name: Copiando pacote do site
+#    win_copy:
+#      src: \\tsclient\C\Users\celima\Downloads\templated-wirework.zip
+#      dest: C:\Temp\
+#      backup: yes
+#      remote_src: yes
+#  - name: Add a powershell module
+#    win_psmodule:
+#      name: Pscx
+#      state: present    
+#      allow_clobber: True  
+
+  - name: Descompactando pacote do site
+    win_unzip:
+      src: C:\Temp\templated-wirework.zip
+      dest: C:\sites\teste1
+      recurse: yes
+      delete_archive: yes      
+
+  - name: Criando um pool da Aplicação, definindo atributos e iniciando
+    win_iis_webapppool:
+      name: SiteApp1
+      state: started
+      attributes:
+        managedRuntimeVersion: v4.0
+        autoStart: no
+  
+  - name: Template IIS site
+    win_iis_website:
+      name: www.testesite1.energia.org.br
+      state: started
+      port: 80
+      hostname: www.testesite1.energia.org.br
+      application_pool: SiteApp1
+      physical_path: C:\sites\teste1
+      parameters: logfile.directory:C:\sites\logs
+    register: website
+
+    

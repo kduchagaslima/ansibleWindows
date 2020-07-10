@@ -1,0 +1,32 @@
+---
+- name: Automation no Active Directory
+  hosts: winserver
+  gather_facts: no
+  vars_prompt: 
+  - name: nuser
+    prompt: "Informe o nome do novo colaborador"
+    private: no
+
+  - name: nlastname
+    prompt: "Informe o sobrenome do novo colaborador"
+    private: no
+
+  - name: login
+    prompt: "Informe o login a ser criado"
+    private: no
+
+  - name: ger
+    prompt: "Informe a Gerência do novo colaborador. EX: GOSD"
+    private: no    
+
+  - name: ger_exec
+    prompt: "Informe a Gerência Executiva do novo colaborador. EX: GESIN"
+    private: no
+
+  - name: usermail
+    prompt: "Informe o email do novo colaborador EX: nome.sobrenome@ccee.org.br"
+    private: no
+
+  tasks:
+  - include: tasks/{{ ger_exec }}_{{ ger }}.yml
+  - include: tasks/DiretorioPessoal.yml

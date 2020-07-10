@@ -1,0 +1,27 @@
+- name: Create VM from template
+  vmware_guest:
+    validate_certs: false
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    datacenter: "VxRail-Datacenter"
+    cluster: Cluster_CCEE
+    folder: "{{ vm_folder }}"
+    name: "{{ vmname }}"
+    template: "{{ vmtemplate }}"
+    disk:
+      - size_gb: "{{ disk_size | default(50) }}"
+        type: thin
+        datastore: "{{ vm_datastore }}"
+    networks:
+    - name: vxw-dvs-61-virtualwire-19-sid-5018-DHCP - Hom - 10.67
+      type: dhcp
+    hardware:
+      memory_mb: "{{ vm_memory | default(4096) }}"
+    wait_for_ip_address: True
+    state: present
+  register: output
+
+- name: IP address info
+  debug:
+    msg: "nome:{{ vmname }} IP:{{ output.instance.ipv4 }} MAC:{{ output.instance.hw_eth0.macaddress }}"
