@@ -4,8 +4,8 @@
     hostname: "{{ vcenter_hostname }}"
     username: "{{ vcenter_username }}"
     password: "{{ vcenter_password }}"
-    datacenter: "VxRail-Datacenter"
-    cluster: Cluster_CCEE
+    datacenter: "{{nameDATACENTER}}"
+    cluster: "{{nameCLUSTER}}"
     folder: "{{ vm_folder }}"
     name: "{{ vmname }}"
     template: "{{ vmtemplate }}"
@@ -14,8 +14,8 @@
         type: thin
         datastore: "{{ vm_datastore }}"
     networks:
-    - name: vxw-dvs-61-virtualwire-19-sid-5018-DHCP - Hom - 10.67
-      type: dhcp
+    - name: "name_NETWORK_SWITCH"
+      type: "NETWORK_PROTOCOL"
     hardware:
       memory_mb: "{{ vm_memory | default(4096) }}"
     wait_for_ip_address: True
