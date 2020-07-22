@@ -1,0 +1,11 @@
+---
+- name: Provisionamento Windows
+  hosts: vcenter_server
+  gather_facts: no
+  connection: local
+  vars_prompt: 
+  - name: vmname
+    prompt: "Informe o nome da VM"
+    private: no
+  tasks:
+    - include: tasks/prov_win.yml
