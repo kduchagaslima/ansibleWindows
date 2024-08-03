@@ -10,19 +10,19 @@
       userPrincipalName: "{{ login }}@limasa.org.br"
       displayName: "{{ nuser }} {{ nlastname }}"
       title: Profissional
-    path: OU=GOSD,OU=GESIN,DC=limasa,DC=org,DC=br
+    path: "{{ oupath }}" ##OU=FOO,OU=BAR,DC=limasa,DC=org,DC=br
 
 - name: Carregando informações do Template
   win_domain_user:
     name: "{{ nuser }} {{ nlastname }}"
     groups_action: add
     groups:
-    - G_GESIN
-    - G_GESIN_GOSD
-    description: GOSD - Operação Data Center & Service Desk
+    - FOO
+    - BAR
+    description: my descritpion
     attributes:        
       sAMAccountName: "{{ login }}"
-      department: GOSD - Operação Data Center & Service Desk
-      physicalDeliveryOfficeName: GESIN - Suporte & Infraestrutura
-      scriptPath: GESIN.bat
+      department: My_department ##FOO BAR - COMPANY CO
+      physicalDeliveryOfficeName: COMPANY CO
+      scriptPath: FOO.bat
   ignore_errors: yes        

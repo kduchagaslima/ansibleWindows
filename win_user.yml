@@ -16,15 +16,15 @@
     private: no
 
   - name: ger
-    prompt: "Informe a Gerência do novo colaborador. EX: GOSD"
+    prompt: "Informe a Gerência do novo colaborador. EX: BAR"
     private: no    
 
   - name: ger_exec
-    prompt: "Informe a Gerência Executiva do novo colaborador. EX: GESIN"
+    prompt: "Informe a Gerência Executiva do novo colaborador. EX: FOO"
     private: no
 
   - name: usermail
-    prompt: "Informe o email do novo colaborador EX: nome.sobrenome@ccee.org.br"
+    prompt: "Informe o email do novo colaborador EX: nome.sobrenome@mycompany.org.br"
     private: no
 
   tasks:
